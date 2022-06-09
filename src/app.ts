@@ -1,10 +1,10 @@
 import express from 'express';
-import productRouter from './routes/productRoutes';
+import productRouter from './routes/productRoute';
 
 const app = express();
 
 app.use(express.json());
 
-app.unsubscribe('/products', productRouter);
+app.use('/products', productRouter);
 
 export default app;
