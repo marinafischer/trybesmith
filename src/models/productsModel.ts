@@ -1,6 +1,6 @@
 import { Pool } from 'mysql2/promise';
 import { ResultSetHeader } from 'mysql2';
-import IProduct from '../interfaces/productInterface';
+import { IProduct, IProductIds } from '../interfaces/productInterface';
 
 export default class ProductModel {
   connection: Pool;
@@ -20,5 +20,12 @@ export default class ProductModel {
     const [data] = await this.connection.execute<ResultSetHeader>(query, [name, amount]);
     const { insertId } = data;
     return { id: insertId, name, amount };
+  }
+
+  async getById(id:number):Promise<IProductIds[]> {
+    // fonte: https://www.mysqltutorial.org/mysql-group_concat/
+    const query = 'SELECT group_concat(id) as productsIds FROM Trybesmith.Products where orderId=?';
+    const [result] = await this.connection.execute(query, [id]);
+    return result as [IProductIds];
   }
 }
