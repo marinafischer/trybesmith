@@ -7,6 +7,6 @@ const router = express.Router();
 const productController = new ProductController();
 
 router.get('/', productController.getAll);
-router.post('/', productMiddleware, (req, res) => { res.status(200).end(); });
+router.post('/', productMiddleware, productController.create);
 
 export default router;

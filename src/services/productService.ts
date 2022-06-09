@@ -13,4 +13,8 @@ export default class ProductService {
     const products = await this.model.getAll();
     return products;
   }
+
+  async create(product: Omit<IProduct, 'id' | 'orderId'>) {
+    return this.model.create(product);
+  }
 }
