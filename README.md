@@ -1,7 +1,9 @@
 # Sobre o projeto Trybesmith!
 
-Projeto feito durante o curso de desenvolvimento web da Trybe
-Construção de um API utilizando Node.js, Express, TypeScript, banco de dados MySQL, biblioteca para validação Joi, biblioteca para criação e verificação de token JWT;
+Projeto feito durante o curso de desenvolvimento web da Trybe.
+
+Construção de um API utilizando Node.js, Express, TypeScript, banco de dados MySQL, biblioteca para validação Joi, biblioteca para criação e verificação de token JWT.
+
 API construida seguindo para realizar CRUD(Create, Read, Update, Delete) seguindo o padrão REST API;
 
 Camadas da aplicação: Model, Service e Controller;
