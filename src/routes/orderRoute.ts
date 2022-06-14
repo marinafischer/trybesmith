@@ -11,7 +11,7 @@ router.get('/', orderController.getAll);
 router.post(
   '/', 
   authMiddleware, 
-  // postOrder, 
+  postOrder, 
   orderController.create,
 );
 
