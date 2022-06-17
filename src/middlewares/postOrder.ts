@@ -3,6 +3,7 @@ import { RequestHandler } from 'express';
 
 const ORDER = Joi.object({
   productsIds: Joi.array().items(Joi.number().required()).required(),
+  id: Joi.number().required(),
 });
 
 const postOrder: RequestHandler = (req, res, next) => {

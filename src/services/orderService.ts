@@ -28,8 +28,8 @@ export default class OrderService {
 
   async create(userId:number, products:number[]) {
     const orderId = await this.model.create(userId);
-    await Promise.all(
-      products.map((productId) => this.productModel.update(productId, orderId)),
-    );
+    const promises = products.map(async (productId) => 
+      this.productModel.update(productId, orderId));
+    await Promise.all(promises);
   }
 }
