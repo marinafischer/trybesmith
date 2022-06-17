@@ -1,5 +1,6 @@
-import { RequestHandler } from 'express';
+import { Response, NextFunction, Request } from 'express';
 import jwt from 'jsonwebtoken';
+// import DataReq from '../interfaces/dataReq';
 
 interface IDecode {
   data: { id:number, username:string };
@@ -7,20 +8,20 @@ interface IDecode {
   exp: number;
 }
 
-const authMiddleware: RequestHandler = (req, res, next) => {
+const authMiddleware = (req: Request, res:Response, next:NextFunction) => {
   const { authorization } = req.headers;
   if (!authorization) return res.status(401).json({ message: 'Token not found' });
   try {
     if (typeof authorization === 'string') {
       const decoded = jwt.verify(authorization, 'mysecret');
-      const { data } = decoded as IDecode;
-      req.data = data;
-      next();
+      const { data: { id } } = decoded as IDecode;
+      req.body = { ...req.body, id };
+      return next();
     }
   } catch (error) {
-    res.status(401).json({ message: 'Invalid token' });
+    return res.status(401).json({ message: 'Invalid token' });
   }
-  next();
+  return next();
 };
 
 export default authMiddleware;

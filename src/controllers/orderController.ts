@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import OrderService from '../services/orderService';
+// import DataReq from '../interfaces/dataReq';
 
 export default class OrderController {
   orderService = new OrderService();
@@ -10,9 +11,12 @@ export default class OrderController {
   };
 
   create = async (req:Request, res:Response) => {
-    const { id } = req.data;
-    const { productsIds } = req.body;
-    const order = await this.orderService.create(id, productsIds);
-    res.status(201).json({ order });
+    try {
+      const { id, productsIds } = req.body;
+      await this.orderService.create(id, productsIds);
+      return res.status(201).json({ userId: id, productsIds });
+    } catch (error) {
+      console.log(error);
+    }
   };
 }
