@@ -1,85 +1,85 @@
-# Sobre o projeto Trybesmith!
+# About the Trybesmith project!
 
-Projeto feito durante o curso de desenvolvimento web da Trybe.
+Project made during Trybe web development course.
 
-Construção de um API utilizando Node.js, Express, TypeScript, banco de dados MySQL, biblioteca para validação Joi, biblioteca para criação e verificação de token JWT.
+It is an application built with Node.js, Express, TypeScript, MySQL database, library for Joi validation, library for creation and verification of JWT token.
 
-API construida para realizar CRUD(Create, Read, Update, Delete) seguindo o padrão REST API;
+The API follows the REST API standard and with it it is possible to perform CRUD (Create, Read, Update, Delete) in a database that simulates a store.
 
-Camadas da aplicação: Model, Service e Controller;
+Application layers: Model, Service and Controller;
 
-## Para começar:
+## To get start:
 
-- Clone o repositório: git@github.com:marinafischer/trybesmith.git
+- Clone the repository: git@github.com:marinafischer/trybesmith.git
 
-- Para iniciar com node:
-  - Instale as dependencias: npm install
-  - Crie um aquivo .env na raiz do projeto com as variáveis esperadas pela connection;
-  - Crie o banco de dados (Trybesmith.sql)
-  - Inicie a aplicação: npm start
+- To start with node:
+  - Install dependencies: npm install
+  - Create a .env file in the project root with the variables expected by the connection;
+  - Create the database (Trybesmith.sql)
+  - Start the application: npm start
 
-- Para iniciar com docker:
-  - Rode o comando: docker-compose up -d
-  - Rode o comando: docker exec -it trybesmith bash
-    Esse comando dará acesso ao terminal do container, a partir daqui é possível rodar os mesmos comandos usados com o node (descritos acima);
+- To start with docker:
+  - Run the command: docker-compose up -d
+  - Run the command: docker exec -it trybesmith bash
+    This command will give access to the container terminal, from here it is possible to run the same commands used with node (described above);
 
 # Endpoints:
 
 ## GET`/products`
-- O endpoint consulta o banco de dados;
-- Retorna o status 200 e todos os produtos do banco;
+- The endpoint queries the database;
+- Returns status 200 and all bank products;
 
 ## POST `/products`
-- O endpoint cadastra um novo produto;
-- O endpoint deve receber a seguinte estrutura:
+- The endpoint registers a new product;
+- The endpoint must receive the following structure:
 
 ```json
   {
-    "name": "Espada longa",
-    "amount": "30 peças de ouro"
+    "name": "Longsword",
+    "amount": "30 gold pieces"
   }
 ```
-- Caso algum dado não seja informado, a API retorna o status 400 e uma mensagem de erro;
-- Se o cadastro ocorrer com sucesso, a API retorna o status 201 e os dados do produto;
+- If any data is not informed, the API returns status 400 and an error message;
+- If the registration is successful, the API returns status 201 and product data;
 
 ## POST `/users`;
-- O endpoint cadastra um novo usuário;
-- O endpoint deve receber a seguinte estrutura:
+- The endpoint registers a new user;
+- The endpoint must receive the following structure:
 ```json
 {
   "username": "string",
-  "classe": "string",
+  "class": "string",
   "level": 1,
   "password": "string"
 }
 ```
-- Caso algum dado não seja informado, a API retorna o status 400 e uma mensagem de erro;
-- Se o cadastro ocorrer com sucesso, a API retorna o status 201 e um token de acesso;
+- If any data is not informed, the API returns status 400 and an error message;
+- If the registration is successful, the API returns status 201 and an access token;
 
 ## GET `/orders`.
-- O endpoint consulta o banco de dados;
-- A rota retorna o status 200 e os pedidos e os `id`s dos produtos associados a estes.
+- The endpoint queries the database;
+- The route returns status 200 and the orders and product `id`s associated with them.
 
 ## POST `/login`
-- A rota recebe os campos `username` e `password`, e esses campos são validados no banco de dados;
-- Um token `JWT` é gerado e retornado caso haja sucesso; 
-- O endpoint deve receber a seguinte estrutura:
+- The route receives the `username` and `password` fields, and these fields are validated in the database;
+- A `JWT` token is generated and returned if successful;
+- The endpoint must receive the following structure:
 ```json
   {
     "username": "string",
     "password": "string"
   }
 ```
-- Caso os dados estejam incorretos, a API retorna o status 400 e uma mensagem de erro;
+- If the data is incorrect, the API returns status 400 and an error message;
 
 ## 6 - POST `/orders`
-- O endpoint cadastra um novo pedido;
-- O pedido só será criado caso a pessoa usuária esteja logada(enviar o token pelo cabeçalho da requisição usando a chave Authorization);
-- Os pedidos enviados são salvos na tabela `Orders` e a tabela `Products` é atualizada em todos os produtos com os `id` incluídos na chave `productsIds` da requisição, e adicionando nesses produtos o `orderId` do pedido recém criado;
-- O endpoint deve receber a seguinte estrutura:
+- The endpoint registers a new request;
+- The request will only be created if the user is logged in (send the token through the request header using the Authorization key);
+- The orders sent are saved in the `Orders` table and the `Products` table is updated in all products with the `id` included in the `productsIds` key of the requisition, and adding in these products the `orderId` of the newly created order;
+- The endpoint must receive the following structure:
 ```json
   {
     "productsIds": [1, 2]
   }
 ```
-- Caso os dados do token ou do json estejam incorretos, a API retorna o status 400 e uma mensagem de erro;
+- If the token or json data is incorrect, the API returns status 400 and an error message;
